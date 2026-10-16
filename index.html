@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+    <title>CT | Calcula Tudo</title>
+  <meta name="theme-color" content="#0D120F">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230D120F'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='800' text-anchor='middle' fill='%2322C55E'%3ECT%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+            <h1 class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <span class="brand__tile brand__tile--c">C</span>
+          <span class="brand__tile brand__tile--t">T</span>
+        </span>
+        <span class="sr-only">CT </span>
+        <span class="brand__name">Calcula Tudo</span>
+      </h1>
+      <div class="tabs-scroll">
+        <div class="tabs" id="tabs" role="tablist" aria-label="Tipo de calculadora">
+          <button type="button" class="tab" role="tab" id="tab-basic" data-tab="basic" aria-controls="panel-basic" aria-selected="true">Básica</button>
+          <button type="button" class="tab" role="tab" id="tab-scientific" data-tab="scientific" aria-controls="panel-scientific" aria-selected="false">Científica</button>
+          <button type="button" class="tab" role="tab" id="tab-prices" data-tab="prices" aria-controls="panel-prices" aria-selected="false">Preços</button>
+          <button type="button" class="tab" role="tab" id="tab-bmi" data-tab="bmi" aria-controls="panel-bmi" aria-selected="false">IMC</button>
+          <button type="button" class="tab" role="tab" id="tab-loan" data-tab="loan" aria-controls="panel-loan" aria-selected="false">Financiamento</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace" id="workspace" data-history="on">
+      <div class="stage">
+
+        <!-- Basic -->
+        <section class="panel calculator" role="tabpanel" id="panel-basic" aria-labelledby="tab-basic">
+          <div class="screen" role="group" aria-label="Visor">
+            <p class="screen__expression"></p>
+            <output class="screen__value" aria-live="polite">0</output>
+          </div>
+
+          <div class="keys">
+            <button type="button" class="key key--muted" data-action="clear" data-key="Escape" aria-label="Limpar tudo">C</button>
+            <button type="button" class="key key--muted" data-action="backspace" data-key="Backspace" aria-label="Apagar último dígito">⌫</button>
+            <button type="button" class="key key--muted" data-action="percent" data-key="%" aria-label="Porcentagem">%</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="/" data-key="/" aria-label="Dividir">÷</button>
+
+            <button type="button" class="key" data-action="digit" data-value="7" data-key="7">7</button>
+            <button type="button" class="key" data-action="digit" data-value="8" data-key="8">8</button>
+            <button type="button" class="key" data-action="digit" data-value="9" data-key="9">9</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="*" data-key="*" aria-label="Multiplicar">×</button>
+
+            <button type="button" class="key" data-action="digit" data-value="4" data-key="4">4</button>
+            <button type="button" class="key" data-action="digit" data-value="5" data-key="5">5</button>
+            <button type="button" class="key" data-action="digit" data-value="6" data-key="6">6</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="-" data-key="-" aria-label="Subtrair">−</button>
+
+            <button type="button" class="key" data-action="digit" data-value="1" data-key="1">1</button>
+            <button type="button" class="key" data-action="digit" data-value="2" data-key="2">2</button>
+            <button type="button" class="key" data-action="digit" data-value="3" data-key="3">3</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="+" data-key="+" aria-label="Somar">+</button>
+
+            <button type="button" class="key key--muted" data-action="negate" aria-label="Inverter sinal">±</button>
+            <button type="button" class="key" data-action="digit" data-value="0" data-key="0">0</button>
+            <button type="button" class="key" data-action="decimal" data-key="," aria-label="Vírgula decimal">,</button>
+            <button type="button" class="key key--equals" data-action="equals" data-key="=" aria-label="Igual">=</button>
+          </div>
+        </section>
+
+        <!-- Scientific -->
+        <section class="panel calculator" role="tabpanel" id="panel-scientific" aria-labelledby="tab-scientific" hidden>
+          <div class="screen" role="group" aria-label="Visor">
+            <p class="screen__expression"></p>
+            <output class="screen__value" aria-live="polite">0</output>
+          </div>
+
+          <div class="keys keys--scientific">
+            <button type="button" class="key key--muted" data-action="angle" aria-label="Ângulos em graus. Alternar para radianos">Deg</button>
+            <button type="button" class="key key--muted" data-action="paren" data-value="(" data-key="(" aria-label="Abrir parênteses">(</button>
+            <button type="button" class="key key--muted" data-action="paren" data-value=")" data-key=")" aria-label="Fechar parênteses">)</button>
+            <button type="button" class="key key--muted" data-action="clear" data-key="Escape" aria-label="Limpar tudo">C</button>
+            <button type="button" class="key key--muted" data-action="backspace" data-key="Backspace" aria-label="Apagar">⌫</button>
+
+            <button type="button" class="key key--muted" data-action="func" data-value="sin">sin</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="cos">cos</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="tan">tan</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="ln" aria-label="Logaritmo natural">ln</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="log" aria-label="Logaritmo na base 10">log</button>
+
+            <button type="button" class="key key--muted" data-action="func" data-value="asin" aria-label="Arco seno">asin</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="acos" aria-label="Arco cosseno">acos</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="atan" aria-label="Arco tangente">atan</button>
+            <button type="button" class="key key--muted" data-action="func" data-value="sqrt" aria-label="Raiz quadrada">√</button>
+            <button type="button" class="key key--muted" data-action="square" aria-label="Elevar ao quadrado">x²</button>
+
+            <button type="button" class="key" data-action="digit" data-value="7" data-key="7">7</button>
+            <button type="button" class="key" data-action="digit" data-value="8" data-key="8">8</button>
+            <button type="button" class="key" data-action="digit" data-value="9" data-key="9">9</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="/" data-key="/" aria-label="Dividir">÷</button>
+            <button type="button" class="key key--muted" data-action="operator" data-value="^" data-key="^" aria-label="Potência">xʸ</button>
+
+            <button type="button" class="key" data-action="digit" data-value="4" data-key="4">4</button>
+            <button type="button" class="key" data-action="digit" data-value="5" data-key="5">5</button>
+            <button type="button" class="key" data-action="digit" data-value="6" data-key="6">6</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="*" data-key="*" aria-label="Multiplicar">×</button>
+            <button type="button" class="key key--muted" data-action="factorial" data-key="!" aria-label="Fatorial">n!</button>
+
+            <button type="button" class="key" data-action="digit" data-value="1" data-key="1">1</button>
+            <button type="button" class="key" data-action="digit" data-value="2" data-key="2">2</button>
+            <button type="button" class="key" data-action="digit" data-value="3" data-key="3">3</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="-" data-key="-" aria-label="Subtrair">−</button>
+            <button type="button" class="key key--muted" data-action="constant" data-value="pi" aria-label="Pi">π</button>
+
+            <button type="button" class="key" data-action="digit" data-value="0" data-key="0">0</button>
+            <button type="button" class="key" data-action="decimal" data-key="," aria-label="Vírgula decimal">,</button>
+            <button type="button" class="key key--muted" data-action="constant" data-value="e" aria-label="Número de Euler">e</button>
+            <button type="button" class="key key--operator" data-action="operator" data-value="+" data-key="+" aria-label="Somar">+</button>
+            <button type="button" class="key key--equals" data-action="equals" data-key="=" aria-label="Igual">=</button>
+          </div>
+        </section>
+
+        <!-- Prices -->
+        <section class="panel" role="tabpanel" id="panel-prices" aria-labelledby="tab-prices" hidden>
+          <div class="cards cards--prices">
+            <section class="card card--discount" aria-labelledby="discount-title">
+              <h2 class="card__title" id="discount-title">Desconto</h2>
+              <p class="card__text">Quanto você paga e quanto economiza.</p>
+              <form class="form" data-form="discount" novalidate>
+                <div class="fields" data-fields></div>
+                <button type="reset" class="link-button">Limpar</button>
+              </form>
+              <div class="results" data-results="discount" aria-live="polite"></div>
+            </section>
+
+            <section class="card card--compare" aria-labelledby="compare-title">
+              <h2 class="card__title" id="compare-title">Comparar preço por unidade</h2>
+              <p class="card__text">Use a mesma unidade nos dois produtos (gramas, mililitros ou unidades).</p>
+              <form class="form" data-form="compare" novalidate>
+                <div class="fields" data-fields></div>
+                <button type="reset" class="link-button">Limpar</button>
+              </form>
+              <div class="results" data-results="compare" aria-live="polite"></div>
+            </section>
+
+            <section class="card card--split" aria-labelledby="split-title">
+              <h2 class="card__title" id="split-title">Dividir a conta</h2>
+              <p class="card__text">Total com gorjeta e valor por pessoa.</p>
+              <form class="form" data-form="split" novalidate>
+                <div class="fields" data-fields></div>
+                <button type="reset" class="link-button">Limpar</button>
+              </form>
+              <div class="results" data-results="split" aria-live="polite"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- BMI -->
+        <section class="panel" role="tabpanel" id="panel-bmi" aria-labelledby="tab-bmi" hidden>
+          <div class="split">
+            <section class="card" aria-labelledby="bmi-title">
+              <h2 class="card__title" id="bmi-title">IMC</h2>
+              <p class="card__text">Índice de massa corporal. A altura é em centímetros (ex.: 175).</p>
+              <form class="form" data-form="bmi" novalidate>
+                <div class="fields" data-fields></div>
+                <button type="reset" class="link-button">Limpar</button>
+              </form>
+            </section>
+            <section class="card card--results" aria-labelledby="bmi-results-title">
+              <h2 class="card__title" id="bmi-results-title">Resultado</h2>
+              <div class="results" data-results="bmi" aria-live="polite"></div>
+              <p class="card__note">O IMC é uma triagem, não um diagnóstico. Ele não separa massa muscular de gordura e não vale da mesma forma para crianças, gestantes e atletas.</p>
+            </section>
+          </div>
+        </section>
+
+        <!-- Loan -->
+        <section class="panel" role="tabpanel" id="panel-loan" aria-labelledby="tab-loan" hidden>
+          <div class="split">
+            <section class="card" aria-labelledby="loan-title">
+              <h2 class="card__title" id="loan-title">Financiamento</h2>
+              <p class="card__text">Price: parcelas fixas. SAC: parcelas que diminuem ao longo do prazo.</p>
+              <form class="form" data-form="loan" novalidate>
+                <div class="fields" data-fields></div>
+                <button type="reset" class="link-button">Limpar</button>
+              </form>
+            </section>
+            <section class="card card--results" aria-labelledby="loan-results-title">
+              <h2 class="card__title" id="loan-results-title">Resultado</h2>
+              <div class="results" data-results="loan" aria-live="polite"></div>
+              <p class="card__note">Considera só juros e amortização. Seguros, tarifas e IOF alteram a parcela real e o CET do banco.</p>
+            </section>
+          </div>
+        </section>
+      </div>
+
+      <aside class="history" id="history" aria-labelledby="history-title">
+        <header class="history__header">
+          <h2 class="history__title" id="history-title">Histórico</h2>
+          <button type="button" class="link-button" id="clearHistory">Limpar</button>
+        </header>
+        <ol class="history__list" id="historyList"></ol>
+        <p class="history__empty" id="historyEmpty">Nenhum cálculo ainda. Os resultados aparecem aqui e podem ser reutilizados com um toque.</p>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
